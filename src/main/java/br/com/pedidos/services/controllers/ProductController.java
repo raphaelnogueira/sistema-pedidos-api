@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.pedidos.application.interfaces.IClientAppService;
-import br.com.pedidos.application.viewmodels.ClientViewModel;
+import br.com.pedidos.application.interfaces.IProductAppService;
+import br.com.pedidos.application.viewmodels.ProductViewModel;
 
 @RestController
-@RequestMapping(value = "clients")
-public class ClientController {
+@RequestMapping(value = "products")
+public class ProductController {
 
     @Autowired
-    private IClientAppService clientAppService;
-
+    private IProductAppService productAppService;
+    
     @GetMapping("/{id}")
-    public ResponseEntity<ClientViewModel> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<ProductViewModel> getById(@PathVariable("id") Long id) {
         if(id == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
         try {
-            ClientViewModel clientViewModel = clientAppService.getById(id);
-            if(clientViewModel == null) { 
+            ProductViewModel productViewModel = productAppService.getById(id);
+            if(productViewModel == null) { 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
-            return ResponseEntity.status(HttpStatus.OK).body(clientViewModel);   
+            return ResponseEntity.status(HttpStatus.OK).body(productViewModel);   
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientViewModel>> getAll() {
-        List<ClientViewModel> clientsViewModel = clientAppService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(clientsViewModel);
+    public ResponseEntity<List<ProductViewModel>> getAll() {
+        List<ProductViewModel> productsViewModel = productAppService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(productsViewModel);
     }
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody ClientViewModel clientViewModel) {
+    public ResponseEntity<String> create(@RequestBody ProductViewModel productViewModel) {
         try {
-            clientAppService.create(clientViewModel);
+            productAppService.create(productViewModel);
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -58,9 +58,9 @@ public class ClientController {
     }
 
     @PutMapping
-    public ResponseEntity<String> update(@RequestBody ClientViewModel clientViewModel) {
+    public ResponseEntity<String> update(@RequestBody ProductViewModel productViewModel) {
         try {
-            clientAppService.update(clientViewModel);
+            productAppService.update(productViewModel);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -70,11 +70,10 @@ public class ClientController {
     @DeleteMapping
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         try {
-            clientAppService.delete(id);
+            productAppService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    
 }
