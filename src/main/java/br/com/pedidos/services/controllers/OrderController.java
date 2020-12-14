@@ -39,10 +39,16 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/clients/{cpf}")
+    public ResponseEntity<List<OrderViewModel>> getByClietnCpf(@PathVariable("cpf") String cpf) {
+        List<OrderViewModel> ordersViewModel = orderAppService.getByClientCpf(cpf);
+        return ResponseEntity.status(HttpStatus.OK).body(ordersViewModel);
+    }
+
     @GetMapping
     public ResponseEntity<List<OrderViewModel>> getAll() {
         List<OrderViewModel> ordersViewModel = orderAppService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(ordersViewModel);
+        return ResponseEntity.status(HttpStatus.OK).body(ordersViewModel); 
     }
 
     @PostMapping

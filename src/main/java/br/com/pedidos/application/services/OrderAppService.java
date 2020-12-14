@@ -59,7 +59,11 @@ public class OrderAppService implements IOrderAppService {
 
     @Override
     public List<OrderViewModel> getByClientCpf(String cpf) {
-        return null;
+        List<Order> orders = orderRepository.findByClientCpf(cpf);
+        
+        return orders.stream()
+            .map(order -> mapper.map(order, OrderViewModel.class))
+            .collect(Collectors.toList());
     }
 
     @Override
