@@ -68,6 +68,7 @@ public class OrderAppService implements IOrderAppService {
 
     @Override
     public void create(OrderViewModel orderViewModel) {
+        orderViewModel.getItens().removeIf(item -> item.getQuantity() <= 0);
         Order order = mapper.map(orderViewModel, Order.class);
 
         Client client = clientRepository.findById(order.getClient().getId()).orElse(null);
