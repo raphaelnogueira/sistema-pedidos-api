@@ -54,6 +54,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<String> create(@RequestBody OrderViewModel orderViewModel) {
         try {
+            orderViewModel.setId(null);
             orderAppService.create(orderViewModel);
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } catch (Exception e) {
