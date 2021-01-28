@@ -41,13 +41,13 @@ public class ClientController {
         }
     }
 
-    @GetMapping
+    @GetMapping //alguma.com.br/clients
     public ResponseEntity<List<ClientViewModel>> getAll() {
         List<ClientViewModel> clientsViewModel = clientAppService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(clientsViewModel);
     }
 
-    @PostMapping
+    @PostMapping //alguma.com.br/clients
     public ResponseEntity<String> create(@RequestBody ClientViewModel clientViewModel) {
         try {
             clientAppService.create(clientViewModel);
@@ -67,7 +67,7 @@ public class ClientController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") //clients/1
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         try {
             clientAppService.delete(id);
