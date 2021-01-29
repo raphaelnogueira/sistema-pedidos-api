@@ -88,5 +88,13 @@ public class OrderAppService implements IOrderAppService {
         });
 
         orderItemRepository.saveAll(orderItens);
-    }    
+    }
+    
+    @Override
+    public void deleteAll() {
+        orderItemRepository.deleteAll();
+        orderRepository.deleteAll();
+        clientRepository.deleteAll();
+        productRepository.deleteAll();
+    }
 }

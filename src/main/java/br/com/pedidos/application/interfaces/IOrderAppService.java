@@ -8,5 +8,6 @@ public interface IOrderAppService {
     OrderViewModel getById(Long id);
     List<OrderViewModel> getAll();
     List<OrderViewModel> getByClientCpf(String cpf);
-    void create(OrderViewModel orderViewModel);    
+    void create(OrderViewModel orderViewModel);
+    void deleteAll();    
 }
