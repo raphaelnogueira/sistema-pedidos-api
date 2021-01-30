@@ -43,7 +43,7 @@ public class ClientAppService implements IClientAppService {
     }
 
     @Override
-    public void create(ClientViewModel clientViewModel) {
+    public void create(ClientViewModel clientViewModel) throws Exception {
         Client client = mapper.map(clientViewModel, Client.class);
         clientService.create(client);
     }

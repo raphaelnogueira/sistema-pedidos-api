@@ -14,8 +14,14 @@ public class ClientService implements IClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public void create(Client client) {
-        clientRepository.saveAndFlush(client);
+    public void create(Client client) throws Exception {
+        Client existClient = clientRepository.findByCpf(client.getCpf());
+        if(existClient == null){
+            clientRepository.saveAndFlush(client);
+            return;
+        }
+
+        throw new Exception("O cliente já existe");
     }
 
     @Override
